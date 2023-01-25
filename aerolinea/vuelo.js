@@ -3,15 +3,15 @@ function habilitarTabla() {
     alert("Lo sentimos, no hay vuelos planificados para hoy");
   } else {
     let botonAct = document.getElementsByClassName("botonactivo");
-    for (i = 0; i < botonAct.length; i++) {
+    for (let i = 0; i < botonAct.length; i++) {
       botonAct[i].hidden = true;
     }
-    //botonAct.map((botonAct.hidden = true));
+    
 
     document.getElementById("miForm").hidden = true;
     let dato;
     dato = window.prompt("Introduce tu nombre", "");
-    resultado = `BIENVENIDO ${dato.toUpperCase()} `;
+    let resultado = dato.toUpperCase();
     document.getElementById("nombrePersona").innerHTML = resultado;
   }
 }
@@ -38,8 +38,7 @@ function habilitarForm() {
   let dato;
   dato = window.prompt("Introduce tu nombre", "");
   resultado = `BIENVENIDO ${dato.toUpperCase()}`;
-  //let a=document.getElementById("nombrePersona").innerHTML += resultado;
-  //document.getElementById("formulario").hidden = "false";
+
   document.getElementById("nombrePersona").innerHTML = resultado;
   document.getElementById("miForm").hidden = false;
 
@@ -55,7 +54,7 @@ let nuevoAtributoId;
 function agregarVuelo() {
   let form = document.getElementById("formulario");
   console.log("este es valor data", new FormData(form).get("origen"));
-  //verifico que la cantidad de vuelos sea<15, y agrego nuevos vuelos.
+  
   if (arrVuelos.length < 15) {
     let nuevoVuelo = crearVuelo();
     arrVuelos.push(nuevoVuelo);
@@ -69,7 +68,7 @@ function agregarVuelo() {
 }
 
 function crearVuelo() {
-  //capturo los valores recibidos por pantalla
+  
   let origenCapturar = document.getElementById("origen").value;
   let destinoCapturar = document.getElementById("destino").value;
   let precioCapturar = document.getElementById("precio").value;
@@ -79,7 +78,7 @@ function crearVuelo() {
 
   const vuelo = {
     id: id,
-    origen: origenCapturar, //cambiar nombre por origen valor
+    origen: origenCapturar, 
     destino: destinoCapturar,
     precio: precioCapturar,
     escala: escalaCapturar,
@@ -87,15 +86,14 @@ function crearVuelo() {
   return vuelo;
 }
 
-// Agrega los datos insertados en la tabla
 function insertarFila(nuevoVuelo) {
   let tablaRef = document.getElementById("tabla");
 
-  //creo una nueva Fila
+
   let newRow = tablaRef.insertRow(-1);
   newRow.setAttribute("ide", nuevoVuelo.id);
 
-  //creo las columnas
+  
   let newCel = newRow.insertCell(0);
   newCel.innerHTML = nuevoVuelo.id;
   let newCel1 = newRow.insertCell(1);
@@ -112,12 +110,12 @@ function insertarFila(nuevoVuelo) {
   deleteButton.type = "reset";
   deleteButton.className = "botonactivo";
 
-  //deleteButton.hidden = false;
+ 
   deleteButton.textContent = "Eliminar";
   newCellDelete.appendChild(deleteButton);
   deleteButton.addEventListener("click", (event) => {
     nuevoAtributoId = parseInt(newRow.getAttribute("ide"));
-    event.target.parentNode.parentNode.remove(), eliminarVuelo(); //eliminar la fila
+    event.target.parentNode.parentNode.remove(), eliminarVuelo(); 
   });
 
   function eliminarVuelo() {
@@ -130,17 +128,15 @@ function insertarFila(nuevoVuelo) {
     }
   }
 }
-//let formulario = document.getElementById("formulario");
-//formulario.addEventListener("onclick", validarElementos);
+
 let validarElementos = function (e) {
   validarNombre(evt);
-  //validarRadio(e);
+
 };
 
 function validarNombre(evt) {
   let validOrigen = document.getElementById("origen").value;
-  //let validDestino = document.getElementById("destino").value;
-  //let validPrecio = document.getElementById("precio").value;
+
   if (validOrigen === "") {
     alert("completa el campo origen");
     evt.preventDefault();
